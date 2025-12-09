@@ -14,8 +14,7 @@ Both the library and CLI follow the same Zod-powered schema for pizza validation
 
 To install dependencies for local development:
 
-```bash 
-npm install```
+```bash npm install```
 
 ### To Build
 
@@ -136,7 +135,6 @@ To run the test suite:
 
 ```npm test```
 
-
 Included tests:
 
 - 1 valid pizza case
@@ -174,7 +172,6 @@ cis-1962-hw3-project-scaffolding-carolinebegg/
 ├── README.md
 ├── LICENSE             # ISC License
 └── AIAssignment.md
-
 
 ## 📜 License
 
