@@ -1,0 +1,55 @@
+{
+  "name": "cis-1962-hw3-project-scaffolding-carolinebegg",
+  "version": "1.0.0",
+  "description": "CLI and library for validating pizza definitions with Zod.",
+  "author": "carolinebegg",
+  "license": "ISC",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "pizza-validator": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "pizza",
+    "validation",
+    "zod",
+    "typescript"
+  ],
+  "homepage": "https://github.com/cis1962-fa25/cis-1962-hw3-project-scaffolding-carolinebegg#readme",
+  "bugs": {
+    "url": "https://github.com/cis1962-fa25/cis-1962-hw3-project-scaffolding-carolinebegg/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cis1962-fa25/cis-1962-hw3-project-scaffolding-carolinebegg.git"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3"
+  }
+}
