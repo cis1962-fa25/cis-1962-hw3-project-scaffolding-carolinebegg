@@ -14,9 +14,7 @@ Both the library and CLI follow the same Zod-powered schema for pizza validation
 
 To install dependencies for local development:
 
-`
-bash npm install
-`
+```bash npm install```
 
 ### To Build
 
@@ -25,6 +23,24 @@ bash npm install
 ## 📚 Library Usage (as an npm dependency)
 
 This example demonstrates how another project would import and use your package.
+
+```
+import { validatePizza } from "cis-1962-hw3-project-scaffolding-carolinebegg";
+
+const result = validatePizza({
+  size: 14,
+  crust: "normal",
+  toppings: ["pepperoni", "mushrooms"],
+});
+
+if (result.isPizza) {
+  // TypeScript now knows that `result.pizza` exists
+  console.log(result.pizza.crust); // normal
+} else {
+  // TypeScript now knows that `result.errors` exists
+  console.error(result.errors);
+}
+```
 
 The validator uses Zod to ensure the pizza matches the required schema and returns a discriminated union:
 
