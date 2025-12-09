@@ -14,9 +14,7 @@ Both the library and CLI follow the same Zod-powered schema for pizza validation
 
 To install dependencies for local development:
 
-```bash
-npm install
-```
+```bash npm install```
 
 ### To Build
 
@@ -138,6 +136,7 @@ These directly satisfy the assignment rubric.
 
 ## 📁 Project Structure
 
+`
 cis-1962-hw3-project-scaffolding-carolinebegg/
 ├── src/
 │   ├── index.ts        # validatePizza implementation + Zod schema
@@ -154,6 +153,7 @@ cis-1962-hw3-project-scaffolding-carolinebegg/
 ├── README.md
 ├── LICENSE             # ISC License
 └── AIAssignment.md
+`
 
 ## 📜 License
 
