@@ -14,7 +14,8 @@ Both the library and CLI follow the same Zod-powered schema for pizza validation
 
 To install dependencies for local development:
 
-```bash npm install```
+```bash 
+npm install```
 
 ### To Build
 
