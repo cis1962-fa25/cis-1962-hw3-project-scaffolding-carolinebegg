@@ -60,10 +60,11 @@ After building the project, you can use the CLI tool to validate JSON files.
 
 ### Option 2 — Run without global installation
 
-```npm exec -- pizza-validator --file ./examples/valid-pizza.json```
+```npm exec -- pizza-validator --file ./examples/valid-pizza.json
 
-or
-```npm exec -- pizza-validator ./examples/valid-pizza.json```
+# or
+
+npm exec -- pizza-validator ./examples/valid-pizza.json```
 
 ### Example Output (valid pizza)
 
