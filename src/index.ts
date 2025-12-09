@@ -20,8 +20,9 @@ const toppingsSchema = z
   )
   .optional()
   .superRefine((toppings, ctx) => {
-    if (!toppings) return;
-
+    if (!toppings) {
+      return;
+    }
     const invalid = toppings.filter((topping) =>
       FORBIDDEN_TOPPINGS.has(topping.toLowerCase()),
     );
@@ -47,15 +48,15 @@ const pizzaSchema = z.object({
 
 export type Pizza = z.output<typeof pizzaSchema>;
 
-export type PizzaValidationSuccess = {
+export interface PizzaValidationSuccess {
   isPizza: true;
   pizza: Pizza;
-};
+}
 
-export type PizzaValidationFailure = {
+export interface PizzaValidationFailure {
   isPizza: false;
   errors: string[];
-};
+}
 
 // discriminated union required by rubric
 export type PizzaValidationResult =

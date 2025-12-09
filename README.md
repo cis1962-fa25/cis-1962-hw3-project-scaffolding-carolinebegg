@@ -1,80 +1,161 @@
-# Pizza Validator
+# 🍕 Pizza Validator
 
-TypeScript + Zod utility for checking whether an arbitrary JSON object is a valid
-pizza according to the CIS 1962 Homework 3 schema. The package exposes a single
-`validatePizza` function and a CLI that accepts a JSON file path.
+A TypeScript + Zod utility for validating whether an arbitrary object is a valid pizza according to the CIS 1962 Homework 3 schema.  
+This package provides:
 
-## Installation
+- A type-safe `validatePizza` function that validates unknown input  
+- A CLI tool (`pizza-validator`) that accepts a path to a JSON file and reports whether it is a valid pizza
+
+Both the library and CLI follow the same Zod-powered schema for pizza validation.
+
+---
+
+## 📦 Installation
+
+To install dependencies for local development:
 
 ```bash
 npm install
 ```
 
-To build the project:
+### To Build
 
-```bash
-npm run build
-```
+```npm run build```
 
-## Library Usage
+## 📚 Library Usage (as an npm dependency)
 
-```ts
-import { validatePizza } from "cis-1962-hw3-project-scaffolding-carolinebegg";
+This example demonstrates how another project would import and use your package.
 
-const result = validatePizza({
-  size: 14,
-  crust: "normal",
-  toppings: ["pepperoni", "mushrooms"],
-});
+The validator uses Zod to ensure the pizza matches the required schema and returns a discriminated union:
 
-if (result.isPizza) {
-  console.log(result.pizza.crust); // normal
-} else {
-  console.error(result.errors);
+- `{ isPizza: true, pizza: Pizza }`
+- `{ isPizza: false, errors: string[] }`
+
+This gives fully type-safe narrowing without manual casting.
+
+## 🖥️ CLI Usage
+
+After building the project, you can use the CLI tool to validate JSON files.
+
+### Option 1 — Install the package globally
+
+```npm install --global .```
+```pizza-validator ./examples/valid-pizza.json```
+
+### Option 2 — Run without global installation
+
+```npm exec -- pizza-validator --file ./examples/valid-pizza.json```
+
+or
+```npm exec -- pizza-validator ./examples/valid-pizza.json```
+
+### Example Output (valid pizza)
+
+#### Pizza is valid ✅
+
+{
+  "size": 12,
+  "crust": "stuffed",
+  "isDeepDish": false,
+  "toppings": [
+    "pepperoni",
+    "mushrooms",
+    "onions"
+  ]
 }
-```
 
-## CLI Usage
+### Example Output (invalid pizza)
 
-Install locally and run:
+#### Pizza is invalid ❌
 
-```bash
-npm install --global .
-pizza-validator ./examples/valid-pizza.json
-```
+- size: size must be greater than 0
+- crust: Invalid option: expected one of "normal"|"stuffed"
+- toppings: Forbidden toppings: glass, plastic
 
-Or run via `npm exec` without installing globally:
+### Missing or unreadable file
 
-```bash
-npm exec -- pizza-validator --file ./examples/valid-pizza.json
-```
+```Failed to read "examples/nope.json": ENOENT: no such file or directory```
 
-The CLI prints why an input is invalid and handles missing or unreadable files
-gracefully.
+
+The CLI prints clear validation errors and gracefully handles missing input files.
+
+## 🔎 Pizza Schema Definition
+
+The validator enforces the following rules:
+
+### Required Fields
+
+| Field   | Type   | Description                                             |
+| ------- | ------ | ------------------------------------------------------- |
+| `size`  | number | Diameter in inches; must be a **positive whole number** |
+| `crust` | string | Must be `"normal"` or `"stuffed"`                       |
+
+### Optional Fields
+
+| Field        | Type     | Default  | Description                             |
+| ------------ | -------- | -------- | --------------------------------------- |
+| `isDeepDish` | boolean  | `false`  | Whether the pizza is deep dish          |
+| `toppings`   | string[] | *(none)* | Must **not** include forbidden toppings |
+
+### Forbidden Toppings
+
+This project chooses the following toppings as invalid:
+
+- plastic
+- glass
+- cardboard
+- soap
+- staples
+Any pizza containing forbidden toppings will fail validation with a detailed error.
+
+## 🧪 Running Tests
+
+This project uses Jest with ts-jest.
+
+To run the test suite:
+
+```npm test```
+
+
+Included tests:
+
+- 1 valid pizza case
+- 2 invalid pizza cases:
+  - Missing required fields
+  Forbidden toppings
+
+These directly satisfy the assignment rubric.
 
 ## Development Scripts
 
-- `npm run build` – compile TypeScript to `dist/`
-- `npm run test` – run the Jest test suite
-- `npm run lint` – lint the project with ESLint
-- `npm run format` – verify formatting with Prettier
-- `npm run format:fix` – apply Prettier formatting
+| Script               | Description                             |
+| -------------------- | --------------------------------------- |
+| `npm run build`      | Compile TypeScript to `dist/`           |
+| `npm run test`       | Run Jest test suite                     |
+| `npm run lint`       | Run ESLint with TypeScript rules        |
+| `npm run format`     | Check Prettier formatting               |
+| `npm run format:fix` | Automatically format code with Prettier |
 
-## Schema Summary
+## 📁 Project Structure
 
-- `size`: positive whole number in inches
-- `crust`: `"normal"` or `"stuffed"`
-- `isDeepDish`: optional boolean (defaults to `false`)
-- `toppings`: optional string array; must not include any forbidden toppings
-  (`plastic`, `glass`, `cardboard`, `soap`, `staples`)
+cis-1962-hw3-project-scaffolding-carolinebegg/
+├── src/
+│   ├── index.ts        # validatePizza implementation + Zod schema
+│   └── cli.ts          # CLI entry point
+├── tests/
+│   └── pizzaValidator.test.ts
+├── examples/
+│   ├── valid-pizza.json
+│   └── invalid-pizza.json
+├── dist/               # compiled build output (ignored by git)
+├── eslint.config.mjs   # ESLint configuration with custom rules
+├── jest.config.js      # Jest configuration
+├── tsconfig.json       # TypeScript configuration
+├── README.md
+├── LICENSE             # ISC License
+└── AIAssignment.md
 
-## Project Structure
+## 📜 License
 
-- `src/index.ts` – `validatePizza` implementation
-- `src/cli.ts` – command-line interface
-- `tests/` – Jest unit tests
-- `dist/` – generated output after running `npm run build`
-
-## License
-
-Released under the ISC License. See `LICENSE` for details.
+Released under the ISC License.
+See the LICENSE file for more information.
